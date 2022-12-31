@@ -1,4 +1,5 @@
 # Pix2Struct
+
 This repository contains code for [Pix2Struct: Screenshot Parsing as Pretraining
 for Visual Language Understanding](https://arxiv.org/abs/2210.03347).
 
@@ -9,6 +10,7 @@ the publicly available URLs released in the
 [C4 dataset](https://www.tensorflow.org/datasets/catalog/c4).
 
 # Getting Started
+
 Clone the github repository, install the `pix2struct` package, and run
 the tests to ensure that all dependencies were successfully installed.
 
@@ -46,7 +48,7 @@ For the remaining documentation we will assume that GCP project information is
 in the following environment variables:
 
 ```
-export GCP_PROJECT=<your_project>
+export GCP_PROJECT=<your_project_ID>
 export GCP_REGION=<your_region>
 ```
 
@@ -55,6 +57,7 @@ be written to `$PIX2STRUCT_DIR/data/<task_name>/preprocessed/`, which is the
 file structure assumed in `tasks.py`.
 
 ## TextCaps
+
 ```
 mkdir -p data/textcaps
 cd data/textcaps
@@ -83,6 +86,7 @@ python -m pix2struct.preprocessing.convert_textcaps \
 ```
 
 ## ChartQA
+
 ```
 mkdir -p data/chartqa
 cd data/chartqa
@@ -104,6 +108,7 @@ python -m pix2struct.preprocessing.convert_chartqa \
 ```
 
 ## RICO Images
+
 Screen2Words, RefExp, and Widget Captioning all require images from the RICO
 dataset. If you'd like to use any of these datasets, please process RICO images
 before proceeding.
@@ -117,6 +122,7 @@ gsutil -m cp -r combined $PIX2STRUCT_DIR/data/rico_images
 ```
 
 ## Widget Captioning
+
 If you haven't already setup RICO, please do so before you proceed.
 
 ```
@@ -143,6 +149,7 @@ python -m pix2struct.preprocessing.convert_widget_captioning \
 ```
 
 ## Screen2Words
+
 If you haven't already setup RICO, please do so before you proceed.
 
 ```
@@ -163,6 +170,7 @@ python -m pix2struct.preprocessing.convert_screen2words \
 ```
 
 ## RefExp
+
 If you haven't already setup RICO, please do so before you proceed.
 
 ```
@@ -188,10 +196,12 @@ python -m pix2struct.preprocessing.convert_refexp \
 ```
 
 ## DocVQA
+
 ```
 mkdir -p data/docvqa
 cd data/docvqa
 ```
+
 Download DocVQA (Single Document Visual Question Answering) from
 [the official source](https://rrc.cvc.uab.es/?ch=17&com=downloads) (requires
 registration). The following steps assume that the train/val/test.tar.gz files
@@ -218,10 +228,12 @@ python -m pix2struct.preprocessing.convert_docvqa \
 ```
 
 ## InfographicVQA
+
 ```
 mkdir -p data/infographicvqa
 cd data/infographicvqa
 ```
+
 Download InfographicVQA Task 1 from [this](https://rrc.cvc.uab.es/?ch=17&com=downloads)
 website (requires registration). The following steps assume that the
 `train/val/test.json` and the `zip` files are in `data/infographicvqa`.
@@ -250,10 +262,12 @@ python -m pix2struct.preprocessing.convert_docvqa \
 ```
 
 ## OCR-VQA
+
 ```
 mkdir -p data/ocrvqa
 cd data/ocrvqa
 ```
+
 Follow instructions on the [OCR-VQA](https://ocr-vqa.github.io/) website to
 download the data into `data/ocrvqa` (requires crawling). The following steps
 assume that `data/ocrvqa` contains a directory called `images` and a file called
@@ -275,6 +289,7 @@ python -m pix2struct.preprocessing.convert_ocrvqa \
 ```
 
 ## AI2D
+
 ```
 mkdir -p data/
 cd data/
@@ -326,6 +341,7 @@ Once you have `ssh`ed into the TPU host, follow the "Getting Started"
 instructions to install the `pix2struct` package.
 
 ## Training
+
 The following command will initiate the training loop, which consists of train
 steps interleaved with evaluations on the validation set.
 
@@ -345,6 +361,7 @@ python -m t5x.train \
 ```
 
 ## Evaluation
+
 The following command evaluates the model on the test set. You will need to
 replace the checkpoint path with the one that was actually selected based on the
 validation performance.
@@ -364,6 +381,7 @@ python -m t5x.eval \
 ```
 
 ## Clean up
+
 When you are done with your TPU VM, remember to delete the instance:
 
 ```
@@ -372,4 +390,4 @@ gcloud compute tpus tpu-vm delete $TPU_NAME --zone=$TPU_ZONE
 
 # Note
 
-*This is not an officially supported Google product.*
+_This is not an officially supported Google product._
