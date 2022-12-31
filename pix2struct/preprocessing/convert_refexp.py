@@ -27,6 +27,7 @@ from PIL import Image
 from PIL import ImageDraw
 from pix2struct.preprocessing import preprocessing_utils
 import tensorflow as tf
+#
 
 flags.DEFINE_string("data_dir", None, "Directory containing the refexp data.")
 
