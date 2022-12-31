@@ -94,8 +94,8 @@ class ProcessSplit(beam.PTransform):
             image = self.get_image(image_id)
         except (IndexError, tf.errors.NotFoundError):
             return
-        if record_id % 100 == 0:
-            logging.info(f"SAMPLE Label={label}, Query={query}")
+        # if record_id % 100 == 0:
+        logging.info(f"######## SAMPLE Label={label}, Query={query}")
         num_negative_samples = flags.FLAGS.num_negative_samples if flags.FLAGS.num_negative_samples and self._split == "train" else num_candidates
         candidates = list(cand for cand in range(
             num_candidates) if cand != label)
