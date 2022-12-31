@@ -1,7 +1,30 @@
 
 tasks:
-  - init: pip install .
+  - name: TPU VM ssh
+    openMode: split-right
+    init:
+      # https://cloud.google.com/tpu/docs/run-calculation-jax
+      sudo apt-get install apt-transport-https ca-certificates gnupg
+      echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+      curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+      sudo apt-get update && sudo apt-get install google-cloud-cli
 
+    command: |
+      export PIX2STRUCT_DIR="gs://pix2struct/pix2struct_data"
+      export GCP_PROJECT=pix2struct-373300
+      export GCP_REGION=us-central1
+      export GCP_ZONE=us-central1-b
+      gcloud config set account ivelin.ivanov@ambianic.ai
+      gcloud config set project $GCP_PROJECT
+      # the following are one time only steps
+      # gcloud services enable tpu.googleapis.com
+      # gcloud beta services identity create --service tpu.googleapis.com
+      # gcloud compute tpus tpu-vm create tpu-pix2struct \
+      # --zone us-central1-b \
+      # --accelerator-type v3-8 \
+      # --version tpu-vm-base
+      # ssh to TPU VM
+      gcloud compute tpus tpu-vm ssh tpu-pix2struct --zone us-central1-b
 
 
 vscode:
