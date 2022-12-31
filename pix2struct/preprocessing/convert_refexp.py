@@ -128,6 +128,9 @@ class ProcessSplit(beam.PTransform):
         # get a unique id per record
         raw_dataset = raw_dataset.enumerate(start=0)
 
+        logging.info(
+            f'>>>>> self._data_dir={self._data_dir}, flags.FLAGS.processed_dir={flags.FLAGS.processed_dir}, {self._split}.tfr'
+        )
         output_path = os.path.join(self._data_dir, flags.FLAGS.processed_dir,
                                    f"{self._split}.tfr")
         return (root
@@ -141,11 +144,15 @@ class ProcessSplit(beam.PTransform):
 
 def pipeline(root):
     _ = (root | "ProcessTrain" >> ProcessSplit("train"))
-    _ = (root | "ProcessVal" >> ProcessSplit("val"))
-    _ = (root | "ProcessTest" >> ProcessSplit("test"))
+    # _ = (root | "ProcessVal" >> ProcessSplit("val"))
+    # _ = (root | "ProcessTest" >> ProcessSplit("test"))
 
 
 def main(argv):
+
+    logging.info(
+        f'\n\n\n\n\n >>>>> >>>>>>> >>>>>>>>>>> >>>>>>>> >>>>> >>>> beam.Pipeline options argv[1:]={argv[1:]} \n\n\n\n\n'
+    )
     with beam.Pipeline(
             options=beam.options.pipeline_options.PipelineOptions(argv[1:])) as root:
         pipeline(root)

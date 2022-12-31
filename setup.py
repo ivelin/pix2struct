@@ -19,6 +19,7 @@ setuptools.setup(
     name="pix2struct",
     version="0.0.1",
     packages=setuptools.find_packages(),
+    install_requires=["tensorflow>=2.11"],
     extras_require={
         "dev": [
             "pytest",
