@@ -146,8 +146,8 @@ class ProcessSplit(beam.PTransform):
 
 
 def pipeline(root):
-    # _ = (root | "ProcessTrain" >> ProcessSplit("train"))
-    # _ = (root | "ProcessVal" >> ProcessSplit("val"))
+    _ = (root | "ProcessTrain" >> ProcessSplit("train"))
+    _ = (root | "ProcessVal" >> ProcessSplit("val"))
     _ = (root | "ProcessTest" >> ProcessSplit("test"))
 
 
